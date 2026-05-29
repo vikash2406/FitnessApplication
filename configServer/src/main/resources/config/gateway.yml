@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: fitness
+          uri: lb://FITNESS
+          predicates:
+            - Path=/api/users/**
+
+        - id: activityEvent-Service
+          uri: lb://ACTIVITYEVENT-SERVICE
+          predicates:
+            - Path=/api/activities/**
+
+        - id: aiService
+          uri: lb://AISERVICE
+          predicates:
+            - Path=/api/recommendations/**
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
